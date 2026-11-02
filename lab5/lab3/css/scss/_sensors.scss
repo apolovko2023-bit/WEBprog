@@ -1,0 +1,143 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+// ----- Підсумок -----
+.sensor-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-md;
+  margin: 0 0 v.$space-lg;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    @include m.card;
+    display: flex;
+    flex: 1 1 180px;
+    flex-direction: column;
+  }
+
+  &__label {
+    color: v.$color-muted;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    color: v.$color-primary-dark;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+}
+
+// ----- Керування -----
+.sensor-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-md;
+  align-items: flex-end;
+  margin-bottom: v.$space-md;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-xs;
+
+    label {
+      font-weight: bold;
+    }
+
+    select,
+    input {
+      padding: v.$space-sm;
+      border: 1px solid v.$color-border;
+      border-radius: v.$radius;
+    }
+  }
+}
+
+.form-message {
+  min-height: 1.5em;
+  margin: 0 0 v.$space-md;
+  color: v.$color-primary-dark;
+  font-weight: bold;
+}
+
+// ----- Сітка карток датчиків: 1 -> 2 -> 3 -----
+.sensor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-md;
+
+  @include m.respond-to(v.$bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.respond-to(v.$bp-desktop) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ----- Картка датчика -----
+// Клас .warning вже існує як блок попередження (лаба 2-3), тому правила
+// .sensor-card.warning мають вищу специфічність (0,2,0) і перекривають його.
+.sensor-card {
+  @include m.card;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-xs;
+  border-left-width: 8px;
+
+  &__id {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  &__meta {
+    margin: 0;
+    color: v.$color-muted;
+  }
+
+  &__level {
+    margin: v.$space-sm 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  &__status {
+    align-self: flex-start;
+    padding: 2px v.$space-sm;
+    color: v.$color-white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 12px;
+  }
+
+  &.normal {
+    background-color: v.$color-white;
+    border-color: v.$color-success;
+  }
+
+  &.normal .sensor-card__status {
+    background-color: v.$color-success;
+  }
+
+  &.warning {
+    background-color: v.$color-warning-bg;
+    border-color: v.$color-warning;
+  }
+
+  &.warning .sensor-card__status {
+    background-color: v.$color-warning;
+  }
+
+  &.critical {
+    background-color: #fdecea;
+    border-color: v.$color-danger;
+  }
+
+  &.critical .sensor-card__status {
+    background-color: v.$color-danger;
+  }
+}
