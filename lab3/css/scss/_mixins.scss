@@ -1,0 +1,29 @@
+@use "variables" as v;
+
+// Media query (Mobile First)
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Центрування через Flexbox
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Контейнер сторінки
+@mixin container {
+  width: min(100% - 2 * v.$space-md, v.$container-max);
+  margin-inline: auto;
+}
+
+// Базова картка
+@mixin card {
+  padding: v.$space-md;
+  background-color: v.$color-white;
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius;
+}

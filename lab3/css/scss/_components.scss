@@ -1,0 +1,258 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+// ----- Логотип -----
+.logo {
+  &__title {
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  &__slogan {
+    margin: v.$space-xs 0 0;
+    color: v.$color-primary-light;
+    font-size: 0.95rem;
+  }
+}
+
+// ----- Навігація (Flexbox) -----
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-sm;
+
+  @include m.respond-to(v.$bp-tablet) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    padding: v.$space-sm v.$space-md;
+    color: v.$color-white;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid v.$color-primary;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: v.$color-primary;
+    }
+  }
+}
+
+// ----- Кнопка -----
+.button {
+  display: inline-block;
+  padding: v.$space-sm v.$space-lg;
+  color: v.$color-white;
+  text-decoration: none;
+  background-color: v.$color-primary;
+  border: none;
+  border-radius: v.$radius;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: v.$color-primary-dark;
+    transform: scale(1.05);
+  }
+}
+
+// ----- Статуси -----
+.status {
+  display: inline-block;
+  padding: 2px v.$space-sm;
+  color: v.$color-white;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 12px;
+
+  &--ok {
+    background-color: v.$color-success;
+  }
+
+  &--warn {
+    background-color: v.$color-warning;
+  }
+
+  &--bad {
+    background-color: v.$color-danger;
+  }
+}
+
+// ----- Поточний моніторинг: Grid 1 -> 2 -> 5 -----
+.monitoring-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-md;
+
+  @include m.respond-to(v.$bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.respond-to(v.$bp-desktop) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.monitor-card {
+  @include m.card;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-xs;
+
+  &__label {
+    color: v.$color-muted;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    color: v.$color-primary-dark;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+
+// ----- Напрями роботи: Grid 1 -> 2 -> 4 -----
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-md;
+
+  @include m.respond-to(v.$bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.respond-to(v.$bp-desktop) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.service-card {
+  @include m.card;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-sm;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  &__text {
+    flex-grow: 1;
+    margin: 0;
+    color: v.$color-muted;
+  }
+
+  &__tag {
+    align-self: flex-start;
+    padding: 2px v.$space-sm;
+    font-size: 0.8rem;
+    background-color: v.$color-surface;
+    border: 1px solid v.$color-border;
+    border-radius: 12px;
+  }
+}
+
+// ----- Попередження -----
+.warning {
+  width: 100%;
+  padding: v.$space-md;
+  background-color: v.$color-warning-bg;
+  border: 1px solid v.$color-danger;
+  border-left-width: 8px;
+  border-radius: v.$radius;
+
+  &__title {
+    margin-top: 0;
+    color: v.$color-danger;
+  }
+
+  &__text {
+    margin: 0 0 v.$space-sm;
+  }
+}
+
+// ----- Таблиця -----
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: v.$color-white;
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius;
+}
+
+.table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: v.$space-sm v.$space-md;
+    text-align: left;
+    border-bottom: 1px solid v.$color-border;
+  }
+
+  th {
+    color: v.$color-white;
+    background-color: v.$color-header;
+  }
+}
+
+// ----- Форма (Grid) -----
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: v.$space-md;
+
+  @include m.respond-to(v.$bp-desktop) {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$space-md;
+
+    @include m.respond-to(v.$bp-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-xs;
+
+    label {
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      padding: v.$space-sm;
+      border: 1px solid v.$color-border;
+      border-radius: v.$radius;
+    }
+  }
+
+  &__submit {
+    @include m.respond-to(v.$bp-desktop) {
+      grid-column: 1 / -1;
+    }
+  }
+}
